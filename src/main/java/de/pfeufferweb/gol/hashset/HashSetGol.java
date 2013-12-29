@@ -23,6 +23,11 @@ public class HashSetGol implements Gol {
 
     @Override
     public HashSetGol next() {
+        Collection<Cell> nextGenerationCells = computeCellsForNextGeneration();
+        return new HashSetGol(nextGenerationCells);
+    }
+
+    private Collection<Cell> computeCellsForNextGeneration() {
         Collection<Cell> nextGenerationCells = new HashSet<>();
         for (Cell cell : aliveCells) {
             int aliveNeighbourCount = aliveNeighbourCount(cell);
@@ -30,7 +35,7 @@ public class HashSetGol implements Gol {
                 nextGenerationCells.add(cell);
             }
         }
-        return new HashSetGol(nextGenerationCells);
+        return nextGenerationCells;
     }
 
     private int aliveNeighbourCount(Cell cell) {
