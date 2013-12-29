@@ -45,12 +45,9 @@ public class HashSetGol implements Gol {
 
     private int aliveNeighbourCount(Cell cell) {
         int count = 0;
-        for (int x = cell.x - 1; x <= cell.x + 1; ++x) {
-            for (int y = cell.y - 1; y <= cell.y + 1; ++y) {
-                Cell neighbour = new Cell(x, y);
-                if (!neighbour.equals(cell) && aliveCells.contains(neighbour)) {
-                    ++count;
-                }
+        for (Cell neighbour : neighbours(cell)) {
+            if (aliveCells.contains(neighbour)) {
+                ++count;
             }
         }
         return count;
