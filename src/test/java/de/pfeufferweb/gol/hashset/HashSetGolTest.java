@@ -38,4 +38,14 @@ public class HashSetGolTest {
                 asList(new Cell(0, 0), new Cell(1, 0), new Cell(0, 1),
                         new Cell(1, 1))));
     }
+
+    @Test
+    public void cellWithTwoAliveNeighboursStayesAlive() {
+        HashSetGol underTest = new HashSetGol();
+        underTest.addCell(0, 0);
+        underTest.addCell(1, 0);
+        underTest.addCell(0, 1);
+        HashSetGol nextGeneration = underTest.next();
+        assertTrue(nextGeneration.getCells().contains(new Cell(0, 0)));
+    }
 }
