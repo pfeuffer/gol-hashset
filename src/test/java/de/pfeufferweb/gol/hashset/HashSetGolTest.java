@@ -16,4 +16,12 @@ public class HashSetGolTest {
         underTest.addCell(0, 0);
         assertTrue(underTest.getCells().contains(new Cell(0, 0)));
     }
+
+    @Test
+    public void singleCellDies() {
+        HashSetGol underTest = new HashSetGol();
+        underTest.addCell(0, 0);
+        HashSetGol nextGeneration = underTest.next();
+        assertTrue(nextGeneration.getCells().isEmpty());
+    }
 }
