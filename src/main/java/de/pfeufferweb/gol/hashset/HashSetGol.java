@@ -15,7 +15,7 @@ public class HashSetGol implements Gol {
 
     @Override
     public HashSetGol next() {
-        return this;
+        return new HashSetGol();
     }
 
     public Collection<Cell> getCells() {
