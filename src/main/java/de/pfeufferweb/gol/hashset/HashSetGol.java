@@ -6,25 +6,25 @@ import java.util.HashSet;
 import de.pfeufferweb.gol.benchmark.Gol;
 
 public class HashSetGol implements Gol {
-    private final Collection<Cell> cells;
+    private final Collection<Cell> aliveCells;
 
-    private HashSetGol(Collection<Cell> cells) {
-        this.cells = cells;
+    private HashSetGol(Collection<Cell> aliveCells) {
+        this.aliveCells = aliveCells;
     }
 
     public HashSetGol() {
-        cells = new HashSet<>();
+        aliveCells = new HashSet<>();
     }
 
     @Override
     public void addCell(int x, int y) {
-        cells.add(new Cell(x, y));
+        aliveCells.add(new Cell(x, y));
     }
 
     @Override
     public HashSetGol next() {
         Collection<Cell> nextGenerationCells = new HashSet<>();
-        for (Cell cell : cells) {
+        for (Cell cell : aliveCells) {
             if (aliveNeighbourCount(cell) == 3) {
                 nextGenerationCells.add(cell);
             }
@@ -37,7 +37,7 @@ public class HashSetGol implements Gol {
         for (int x = cell.x - 1; x <= cell.x + 1; ++x) {
             for (int y = cell.y - 1; y <= cell.y + 1; ++y) {
                 Cell neighbour = new Cell(x, y);
-                if (!neighbour.equals(cell) && cells.contains(neighbour)) {
+                if (!neighbour.equals(cell) && aliveCells.contains(neighbour)) {
                     ++count;
                 }
             }
@@ -46,6 +46,6 @@ public class HashSetGol implements Gol {
     }
 
     public Collection<Cell> getCells() {
-        return cells;
+        return aliveCells;
     }
 }
