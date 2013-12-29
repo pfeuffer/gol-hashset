@@ -8,7 +8,7 @@ import de.pfeufferweb.gol.benchmark.Gol;
 public class HashSetGol implements Gol {
 
     @Override
-    public void addCell(int arg0, int arg1) {
+    public void addCell(int x, int y) {
     }
 
     @Override
