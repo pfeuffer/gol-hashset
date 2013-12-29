@@ -48,4 +48,14 @@ public class HashSetGolTest {
         HashSetGol nextGeneration = underTest.next();
         assertTrue(nextGeneration.getCells().contains(new Cell(0, 0)));
     }
+
+    @Test
+    public void deadCellWithThreeAliveNeighboursComesToLive() {
+        HashSetGol underTest = new HashSetGol();
+        underTest.addCell(1, 0);
+        underTest.addCell(0, 1);
+        underTest.addCell(1, 1);
+        HashSetGol nextGeneration = underTest.next();
+        assertTrue(nextGeneration.getCells().contains(new Cell(0, 0)));
+    }
 }
