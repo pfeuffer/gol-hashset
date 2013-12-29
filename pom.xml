@@ -21,5 +21,10 @@
       <version>4.10</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>de.pfeufferweb</groupId>
+      <artifactId>gol-benchmark</artifactId>
+      <version>0.1-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 </project>
