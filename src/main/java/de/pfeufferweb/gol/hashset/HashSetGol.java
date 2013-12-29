@@ -25,7 +25,8 @@ public class HashSetGol implements Gol {
     public HashSetGol next() {
         Collection<Cell> nextGenerationCells = new HashSet<>();
         for (Cell cell : aliveCells) {
-            if (aliveNeighbourCount(cell) == 3) {
+            int aliveNeighbourCount = aliveNeighbourCount(cell);
+            if (aliveNeighbourCount == 2 || aliveNeighbourCount == 3) {
                 nextGenerationCells.add(cell);
             }
         }
