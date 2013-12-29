@@ -34,6 +34,11 @@ public class HashSetGol implements Gol {
             if (aliveNeighbourCount == 2 || aliveNeighbourCount == 3) {
                 nextGenerationCells.add(cell);
             }
+            for (Cell neighbour : neighbours(cell)) {
+                if (aliveNeighbourCount(neighbour) == 3) {
+                    nextGenerationCells.add(neighbour);
+                }
+            }
         }
         return nextGenerationCells;
     }
@@ -49,6 +54,19 @@ public class HashSetGol implements Gol {
             }
         }
         return count;
+    }
+
+    private Collection<Cell> neighbours(Cell cell) {
+        Collection<Cell> neighbours = new HashSet<>();
+        for (int x = cell.x - 1; x <= cell.x + 1; ++x) {
+            for (int y = cell.y - 1; y <= cell.y + 1; ++y) {
+                Cell neighbour = new Cell(x, y);
+                if (!neighbour.equals(cell)) {
+                    neighbours.add(neighbour);
+                }
+            }
+        }
+        return neighbours;
     }
 
     public Collection<Cell> getCells() {
