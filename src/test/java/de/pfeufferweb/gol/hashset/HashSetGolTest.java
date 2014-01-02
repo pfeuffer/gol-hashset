@@ -8,13 +8,13 @@ import org.junit.Test;
 public class HashSetGolTest {
     @Test
     public void emptyGolStaysEmpty() {
-        assertTrue(new HashSetGolBuillder().create().next().getCells()
+        assertTrue(new HashSetGolBuilder().create().next().getCells()
                 .isEmpty());
     }
 
     @Test
     public void addedCellStored() {
-        HashSetGolBuillder builder = new HashSetGolBuillder();
+        HashSetGolBuilder builder = new HashSetGolBuilder();
         builder.addCell(0, 0);
         HashSetGol underTest = builder.create();
         assertTrue(underTest.getCells().contains(new Cell(0, 0)));
@@ -22,7 +22,7 @@ public class HashSetGolTest {
 
     @Test
     public void singleCellDies() {
-        HashSetGolBuillder builder = new HashSetGolBuillder();
+        HashSetGolBuilder builder = new HashSetGolBuilder();
         builder.addCell(0, 0);
         HashSetGol underTest = builder.create();
         HashSetGol nextGeneration = underTest.next();
@@ -31,7 +31,7 @@ public class HashSetGolTest {
 
     @Test
     public void staticCellBlockStayesAlive() {
-        HashSetGolBuillder builder = new HashSetGolBuillder();
+        HashSetGolBuilder builder = new HashSetGolBuilder();
         builder.addCell(0, 0);
         builder.addCell(1, 0);
         builder.addCell(0, 1);
@@ -45,7 +45,7 @@ public class HashSetGolTest {
 
     @Test
     public void cellWithTwoAliveNeighboursStayesAlive() {
-        HashSetGolBuillder builder = new HashSetGolBuillder();
+        HashSetGolBuilder builder = new HashSetGolBuilder();
         builder.addCell(0, 0);
         builder.addCell(1, 0);
         builder.addCell(0, 1);
@@ -56,7 +56,7 @@ public class HashSetGolTest {
 
     @Test
     public void deadCellWithThreeAliveNeighboursComesToLive() {
-        HashSetGolBuillder builder = new HashSetGolBuillder();
+        HashSetGolBuilder builder = new HashSetGolBuilder();
         builder.addCell(1, 0);
         builder.addCell(0, 1);
         builder.addCell(1, 1);
