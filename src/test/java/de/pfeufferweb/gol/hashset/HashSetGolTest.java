@@ -8,31 +8,35 @@ import org.junit.Test;
 public class HashSetGolTest {
     @Test
     public void emptyGolStaysEmpty() {
-        assertTrue(new HashSetGol().next().getCells().isEmpty());
+        assertTrue(new HashSetGolBuillder().create().next().getCells()
+                .isEmpty());
     }
 
     @Test
     public void addedCellStored() {
-        HashSetGol underTest = new HashSetGol();
-        underTest.addCell(0, 0);
+        HashSetGolBuillder builder = new HashSetGolBuillder();
+        builder.addCell(0, 0);
+        HashSetGol underTest = builder.create();
         assertTrue(underTest.getCells().contains(new Cell(0, 0)));
     }
 
     @Test
     public void singleCellDies() {
-        HashSetGol underTest = new HashSetGol();
-        underTest.addCell(0, 0);
+        HashSetGolBuillder builder = new HashSetGolBuillder();
+        builder.addCell(0, 0);
+        HashSetGol underTest = builder.create();
         HashSetGol nextGeneration = underTest.next();
         assertTrue(nextGeneration.getCells().isEmpty());
     }
 
     @Test
     public void staticCellBlockStayesAlive() {
-        HashSetGol underTest = new HashSetGol();
-        underTest.addCell(0, 0);
-        underTest.addCell(1, 0);
-        underTest.addCell(0, 1);
-        underTest.addCell(1, 1);
+        HashSetGolBuillder builder = new HashSetGolBuillder();
+        builder.addCell(0, 0);
+        builder.addCell(1, 0);
+        builder.addCell(0, 1);
+        builder.addCell(1, 1);
+        HashSetGol underTest = builder.create();
         HashSetGol nextGeneration = underTest.next();
         assertTrue(nextGeneration.getCells().containsAll(
                 asList(new Cell(0, 0), new Cell(1, 0), new Cell(0, 1),
@@ -41,20 +45,22 @@ public class HashSetGolTest {
 
     @Test
     public void cellWithTwoAliveNeighboursStayesAlive() {
-        HashSetGol underTest = new HashSetGol();
-        underTest.addCell(0, 0);
-        underTest.addCell(1, 0);
-        underTest.addCell(0, 1);
+        HashSetGolBuillder builder = new HashSetGolBuillder();
+        builder.addCell(0, 0);
+        builder.addCell(1, 0);
+        builder.addCell(0, 1);
+        HashSetGol underTest = builder.create();
         HashSetGol nextGeneration = underTest.next();
         assertTrue(nextGeneration.getCells().contains(new Cell(0, 0)));
     }
 
     @Test
     public void deadCellWithThreeAliveNeighboursComesToLive() {
-        HashSetGol underTest = new HashSetGol();
-        underTest.addCell(1, 0);
-        underTest.addCell(0, 1);
-        underTest.addCell(1, 1);
+        HashSetGolBuillder builder = new HashSetGolBuillder();
+        builder.addCell(1, 0);
+        builder.addCell(0, 1);
+        builder.addCell(1, 1);
+        HashSetGol underTest = builder.create();
         HashSetGol nextGeneration = underTest.next();
         assertTrue(nextGeneration.getCells().contains(new Cell(0, 0)));
     }

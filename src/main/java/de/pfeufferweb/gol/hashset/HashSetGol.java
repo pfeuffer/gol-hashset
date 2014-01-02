@@ -5,20 +5,11 @@ import java.util.HashSet;
 
 import de.pfeufferweb.gol.benchmark.Gol;
 
-public class HashSetGol implements Gol {
+class HashSetGol implements Gol {
     private final Collection<Cell> aliveCells;
 
-    private HashSetGol(Collection<Cell> aliveCells) {
+    HashSetGol(Collection<Cell> aliveCells) {
         this.aliveCells = aliveCells;
-    }
-
-    public HashSetGol() {
-        aliveCells = new HashSet<>();
-    }
-
-    @Override
-    public void addCell(int x, int y) {
-        aliveCells.add(new Cell(x, y));
     }
 
     @Override
