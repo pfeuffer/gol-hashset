@@ -1,31 +1,35 @@
 package de.pfeufferweb.gol.hashset;
 
+import static de.pfeufferweb.gol.hashset.CellLongConverter.cell;
+import static de.pfeufferweb.gol.hashset.CellLongConverter.x;
+import static de.pfeufferweb.gol.hashset.CellLongConverter.y;
+
 import java.util.Collection;
 import java.util.HashSet;
 
 import de.pfeufferweb.gol.benchmark.Gol;
 
 class HashSetGol implements Gol {
-    private final Collection<Cell> aliveCells;
+    private final Collection<Long> aliveCells;
 
-    HashSetGol(Collection<Cell> aliveCells) {
+    HashSetGol(Collection<Long> aliveCells) {
         this.aliveCells = aliveCells;
     }
 
     @Override
     public HashSetGol next() {
-        Collection<Cell> nextGenerationCells = computeCellsForNextGeneration();
+        Collection<Long> nextGenerationCells = computeCellsForNextGeneration();
         return new HashSetGol(nextGenerationCells);
     }
 
-    private Collection<Cell> computeCellsForNextGeneration() {
-        Collection<Cell> nextGenerationCells = new HashSet<>();
-        for (Cell cell : aliveCells) {
+    private Collection<Long> computeCellsForNextGeneration() {
+        Collection<Long> nextGenerationCells = new HashSet<>();
+        for (Long cell : aliveCells) {
             int aliveNeighbourCount = aliveNeighbourCount(cell);
             if (aliveNeighbourCount == 2 || aliveNeighbourCount == 3) {
                 nextGenerationCells.add(cell);
             }
-            for (Cell neighbour : neighbours(cell)) {
+            for (Long neighbour : neighbours(cell)) {
                 if (aliveNeighbourCount(neighbour) == 3) {
                     nextGenerationCells.add(neighbour);
                 }
@@ -34,9 +38,9 @@ class HashSetGol implements Gol {
         return nextGenerationCells;
     }
 
-    private int aliveNeighbourCount(Cell cell) {
+    private int aliveNeighbourCount(Long cell) {
         int count = 0;
-        for (Cell neighbour : neighbours(cell)) {
+        for (Long neighbour : neighbours(cell)) {
             if (aliveCells.contains(neighbour)) {
                 ++count;
             }
@@ -44,12 +48,12 @@ class HashSetGol implements Gol {
         return count;
     }
 
-    private Collection<Cell> neighbours(Cell cell) {
-        Collection<Cell> neighbours = new HashSet<>();
-        for (int x = cell.x - 1; x <= cell.x + 1; ++x) {
-            for (int y = cell.y - 1; y <= cell.y + 1; ++y) {
-                Cell neighbour = new Cell(x, y);
-                if (!neighbour.equals(cell)) {
+    private Collection<Long> neighbours(Long cell) {
+        Collection<Long> neighbours = new HashSet<>();
+        for (int x = x(cell) - 1; x <= x(cell) + 1; ++x) {
+            for (int y = y(cell) - 1; y <= y(cell) + 1; ++y) {
+                long neighbour = cell(x, y);
+                if (neighbour != cell) {
                     neighbours.add(neighbour);
                 }
             }
@@ -57,13 +61,13 @@ class HashSetGol implements Gol {
         return neighbours;
     }
 
-    public Collection<Cell> getCells() {
+    public Collection<Long> getCells() {
         return aliveCells;
     }
 
     @Override
     public boolean isAlive(int x, int y) {
-        return aliveCells.contains(new Cell(x, y));
+        return aliveCells.contains(cell(x, y));
     }
 
     @Override
