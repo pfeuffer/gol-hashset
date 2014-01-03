@@ -60,4 +60,14 @@ class HashSetGol implements Gol {
     public Collection<Cell> getCells() {
         return aliveCells;
     }
+
+    @Override
+    public boolean isAlive(int x, int y) {
+        return aliveCells.contains(new Cell(x, y));
+    }
+
+    @Override
+    public String toString() {
+        return aliveCells.toString();
+    }
 }
