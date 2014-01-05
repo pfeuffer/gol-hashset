@@ -29,13 +29,21 @@ class HashSetGol implements Gol {
             if (aliveNeighbourCount == 2 || aliveNeighbourCount == 3) {
                 nextGenerationCells.add(cell);
             }
-            for (Long neighbour : neighbours(cell)) {
-                if (aliveNeighbourCount(neighbour) == 3) {
-                    nextGenerationCells.add(neighbour);
-                }
+        }
+        for (Long neighbour : allNeighbours()) {
+            if (aliveNeighbourCount(neighbour) == 3) {
+                nextGenerationCells.add(neighbour);
             }
         }
         return nextGenerationCells;
+    }
+
+    private Collection<Long> allNeighbours() {
+        Collection<Long> neighbours = new HashSet<>();
+        for (Long cell : aliveCells) {
+            neighbours.addAll(neighbours(cell));
+        }
+        return neighbours;
     }
 
     private int aliveNeighbourCount(Long cell) {
